@@ -320,5 +320,3 @@ mensajechat.addEventListener("input", (event) => {
 
 
 updateCharacterCount();
-
-
