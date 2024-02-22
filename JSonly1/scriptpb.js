@@ -1,15 +1,24 @@
 
 
 
+
+
+
+
 DOM = document;
 
 // Paleta de Colores: https://paletadecolores.com.mx/paleta/11091a/2f2f4d/626970/bab195/e8d18e/
+
+
+
 const mainbodycolor = "#11091a";
-const primarycolor = "#2f2f4d";
-const secondarycolor = "#626970";
-const terciary = "#bab195";
-const fourth = "#bab195";
-const fifth = "#e8d18e";
+const primarycolor = "#8db986";
+const secondarycolor = "#acce91";
+const terciary = "#efeae4";
+const fourth = "#373737";
+const fifth = "#373737";
+
+
 
 
 //Dimensiones
@@ -31,7 +40,7 @@ divconten.style.backgroundColor = primarycolor;
 divconten.style.height = "calc(100vh - 0px)";
 divconten.style.display = "grid";
 divconten.style.gridTemplateColumns = "20% 80%";
-divconten.style.gridTemplateRows = "85% 15%"
+divconten.style.gridTemplateRows = "80% 20%"
 divconten.style.border =  "1px solid black";
 
 //Elemento listado-chats
@@ -60,11 +69,15 @@ divcontenidoperf.style.color = fifth;
 
 
 
+
 //Mensajes
 let mensaje = DOM.createElement("div");
 mensaje.style.backgroundColor = secondarycolor;
 mensaje.border = "1px solid black";
-mensaje.innerText = "mensaje"
+mensaje.innerText = "mensaje";
+
+mensaje.scrollTop = mensaje.scrollHeight;
+
 
 
 
@@ -72,7 +85,7 @@ mensaje.innerText = "mensaje"
 
 
 //Contenido Chat
-let contenidochat = DOM.createElement("div")
+let contenidochat = DOM.createElement("div");
 
 contenidochat.style.backgroundColor = primarycolor;
 contenidochat.style.border = "1px solid black";
@@ -91,20 +104,108 @@ imagenperfil.src = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGB
 imagenperfil.alt = "Foto"
 divcontenidoperf.appendChild(imagenperfil);
 
+
+let buttonlight = DOM.createElement("button");
+buttonlight.style.backgroundColor = fourth;
+buttonlight.style.color = primarycolor;
+buttonlight.innerText = "Light\nMode"
+buttonlight.style.width = "20%"
+buttonlight.style.height = "40%"
+divcontenidoperf.appendChild(buttonlight)
+
+
+//Si es True es light 
+localStorage.setItem( 'theme', true)
+if(localStorage.getItem('theme') == false){
+    mainbodycolor = "#11091a";
+    primarycolor = "#2f2f4d";
+    secondarycolor = "#626970";
+    terciary = "#bab195";
+    fourth = "#bab195";
+    fifth = "#e8d18e";
+}
+
+buttonlight.addEventListener("click", function() {
+    if(localStorage.getItem('theme') == true){
+         mainbodycolor = "#11091a";
+         primarycolor = "#8db986";
+         secondarycolor = "#acce91";
+         terciary = "#efeae4";
+         fourth = "#373737";
+         fifth = "#373737";
+    }
+
+    localStorage.setItem('theme', true)
+    
+      // Change to your desired color
+  });
+
+
+
+let buttondark = DOM.createElement("button");
+buttondark.style.backgroundColor = fourth;
+buttondark.style.color = primarycolor;
+buttondark.innerText = "Dark\nMode"
+buttondark.style.width = "20%"
+buttondark.style.height = "40%"
+divcontenidoperf.appendChild(buttondark)
+
+buttondark.addEventListener("click", function() {
+    if(localStorage.getItem('theme') == false){
+        mainbodycolor = "#11091a";
+        primarycolor = "#2f2f4d";
+        secondarycolor = "#626970";
+        terciary = "#bab195";
+        fourth = "#bab195";
+        fifth = "#e8d18e";
+    }
+
+    localStorage.setItem('theme', false)
+    DOM.body.appendChild(divconten);
+
+      // Change to your desired color
+  });
+
+
+
+
 let mensajechat = DOM.createElement("textarea");
+mensajechat.id = "areatext"
 mensajechat.style.width = "90" + unitperc;
 mensajechat.style.height = "90" + unitperc;
 mensajechat.style.backgroundColor = primarycolor;
 mensajechat.style.color = fifth;
+
+
+
+
+
 contenidochat.appendChild(mensajechat);
 
 let button = DOM.createElement("button");
 button.style.backgroundColor = fourth;
 button.style.color = primarycolor;
-button.innerText = "Enviar"
-button.style.width = "10%"
-button.style.height = "90%"
+button.innerText = "Enviar";
+button.style.width = "10%";
+button.style.height = "90%";
+button.id = "enviar";
 contenidochat.appendChild(button);
+
+mensajechat.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      button.onclick();
+    }
+  });
+
+button.addEventListener("click", function() {
+    
+    button.style.backgroundColor = fifth;
+    setTimeout(() => {
+      button.style.backgroundColor = terciary;
+    }, 2000);
+});
+  
 
 
 
@@ -191,5 +292,33 @@ async function crearListoDeChats(){
 }
 
 crearListoDeChats();
+
+
+const texto = DOM.getElementById("areatext");
+function updateCharacterCount() {
+    const currentLength = texto.value.length;
+    const remaining = Math.max(140 - currentLength, 0);
+    // Update the element displaying the character count
+    // document.getElementById("characterCountId").textContent = remaining;
+}
+
+mensajechat.addEventListener("input", (event) => {
+    // Get the current text value
+    const text = event.target.value;
+  
+    // Limit the text length to the maximum
+    const limitedText = text.substring(0, 140);
+  
+    // Update the text area value only if it changed
+    if (limitedText !== text) {
+      texto.value = limitedText;
+    }
+  
+    // Update the character count display (optional)
+    updateCharacterCount();
+});
+
+
+updateCharacterCount();
 
 
