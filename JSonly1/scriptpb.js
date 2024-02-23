@@ -10,13 +10,12 @@ DOM = document;
 // Paleta de Colores: https://paletadecolores.com.mx/paleta/11091a/2f2f4d/626970/bab195/e8d18e/
 
 
-
-const mainbodycolor = "#11091a";
-const primarycolor = "#8db986";
-const secondarycolor = "#acce91";
-const terciary = "#efeae4";
-const fourth = "#373737";
-const fifth = "#373737";
+let mainbodycolor = "#11091a";
+let primarycolor = "#8db986";
+let secondarycolor = "#acce91";
+let terciary = "#efeae4";
+let fourth = "#373737";
+let fifth = "#373737";
 
 
 
@@ -80,6 +79,7 @@ mensaje.scrollTop = mensaje.scrollHeight;
 
 
 
+let escribir = DOM.createElement("div");
 
 //SEPARAR
 
@@ -115,7 +115,6 @@ divcontenidoperf.appendChild(buttonlight)
 
 
 //Si es True es light 
-localStorage.setItem( 'theme', true)
 if(localStorage.getItem('theme') == false){
     mainbodycolor = "#11091a";
     primarycolor = "#2f2f4d";
@@ -126,16 +125,30 @@ if(localStorage.getItem('theme') == false){
 }
 
 buttonlight.addEventListener("click", function() {
-    if(localStorage.getItem('theme') == true){
-         mainbodycolor = "#11091a";
-         primarycolor = "#8db986";
-         secondarycolor = "#acce91";
-         terciary = "#efeae4";
-         fourth = "#373737";
-         fifth = "#373737";
-    }
+    localStorage.setItem('theme', "false");
+    mainbodycolor = "#11091a";
+    primarycolor = "#8db986";
+    secondarycolor = "#acce91";
+    terciary = "#efeae4";
+    fourth = "#373737";
+    fifth = "#373737";
 
-    localStorage.setItem('theme', true)
+    divconten.style.backgroundColor = primarycolor;
+    divchatlist.style.backgroundColor = primarycolor;
+    divcontenidoperf.style.backgroundColor = primarycolor;
+    contenidochat.style.backgroundColor = primarycolor;
+    mensaje.style.backgroundColor = secondarycolor;
+    buttonlight.style.backgroundColor = fourth;
+    buttonlight.style.color = primarycolor;
+    buttondark.style.backgroundColor = fourth;
+    buttondark.style.color = primarycolor;
+    mensajechat.style.backgroundColor = primarycolor;
+    mensajechat.style.color = fifth;
+    button.style.backgroundColor = fourth;
+    button.style.color = primarycolor;
+    divchat.style.backgroundColor = fifth;
+    divchat.style.color = secondarycolor;
+
     
       // Change to your desired color
   });
@@ -151,17 +164,29 @@ buttondark.style.height = "40%"
 divcontenidoperf.appendChild(buttondark)
 
 buttondark.addEventListener("click", function() {
-    if(localStorage.getItem('theme') == false){
-        mainbodycolor = "#11091a";
-        primarycolor = "#2f2f4d";
-        secondarycolor = "#626970";
-        terciary = "#bab195";
-        fourth = "#bab195";
-        fifth = "#e8d18e";
-    }
+    localStorage.setItem('theme', "true")
+    mainbodycolor = "#11091a";
+    primarycolor = "#2f2f4d";
+    secondarycolor = "#626970";
+    terciary = "#bab195";
+    fourth = "#e8d18e";
+    fifth = "#e8d18e";
+    divconten.style.backgroundColor = primarycolor;
+    divchatlist.style.backgroundColor = primarycolor;
+    divcontenidoperf.style.backgroundColor = primarycolor;
+    contenidochat.style.backgroundColor = primarycolor;
+    mensaje.style.backgroundColor = secondarycolor;
+    buttonlight.style.backgroundColor = fourth;
+    buttonlight.style.color = primarycolor;
+    buttondark.style.backgroundColor = fourth;
+    buttondark.style.color = primarycolor;
+    mensajechat.style.backgroundColor = primarycolor;
+    mensajechat.style.color = fifth;
+    button.style.backgroundColor = fourth;
+    button.style.color = primarycolor;
+    divchat.style.backgroundColor = fifth;
+    divchat.style.color = secondarycolor;
 
-    localStorage.setItem('theme', false)
-    DOM.body.appendChild(divconten);
 
       // Change to your desired color
   });
@@ -294,7 +319,8 @@ async function crearListoDeChats(){
 crearListoDeChats();
 
 
-const texto = DOM.getElementById("areatext");
+
+const texto = mensajechat;
 function updateCharacterCount() {
     const currentLength = texto.value.length;
     const remaining = Math.max(140 - currentLength, 0);
@@ -302,7 +328,7 @@ function updateCharacterCount() {
     // document.getElementById("characterCountId").textContent = remaining;
 }
 
-mensajechat.addEventListener("input", (event) => {
+texto.addEventListener("input", (event) => {
     // Get the current text value
     const text = event.target.value;
   
@@ -320,3 +346,51 @@ mensajechat.addEventListener("input", (event) => {
 
 
 updateCharacterCount();
+
+
+if(localStorage.getItem('theme') == "true"){
+    console.log("EFE");
+    mainbodycolor = "#11091a";
+    primarycolor = "#2f2f4d";
+    secondarycolor = "#626970";
+    terciary = "#bab195";
+    fourth = "#e8d18e";
+    fifth = "#e8d18e";
+    divconten.style.backgroundColor = primarycolor;
+    divchatlist.style.backgroundColor = primarycolor;
+    divcontenidoperf.style.backgroundColor = primarycolor;
+    contenidochat.style.backgroundColor = primarycolor;
+    mensaje.style.backgroundColor = secondarycolor;
+    buttonlight.style.backgroundColor = fourth;
+    buttonlight.style.color = primarycolor;
+    buttondark.style.backgroundColor = fourth;
+    buttondark.style.color = primarycolor;
+    mensajechat.style.backgroundColor = primarycolor;
+    mensajechat.style.color = fifth;
+    button.style.backgroundColor = fourth;
+    button.style.color = primarycolor;
+
+}
+
+if(localStorage.getItem('theme') == "false"){
+    mainbodycolor = "#11091a";
+    primarycolor = "#8db986";
+    secondarycolor = "#acce91";
+    terciary = "#efeae4";
+    fourth = "#373737";
+    fifth = "#373737";
+
+    divconten.style.backgroundColor = primarycolor;
+    divchatlist.style.backgroundColor = primarycolor;
+    divcontenidoperf.style.backgroundColor = primarycolor;
+    contenidochat.style.backgroundColor = primarycolor;
+    mensaje.style.backgroundColor = secondarycolor;
+    buttonlight.style.backgroundColor = fourth;
+    buttonlight.style.color = primarycolor;
+    buttondark.style.backgroundColor = fourth;
+    buttondark.style.color = primarycolor;
+    mensajechat.style.backgroundColor = primarycolor;
+    mensajechat.style.color = fifth;
+    button.style.backgroundColor = fourth;
+    button.style.color = primarycolor;
+}
