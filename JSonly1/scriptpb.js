@@ -16,6 +16,7 @@ let secondarycolor = "#acce91";
 let terciary = "#efeae4";
 let fourth = "#373737";
 let fifth = "#373737";
+let numid = 0;
 
 
 
@@ -74,8 +75,8 @@ let mensaje = DOM.createElement("div");
 mensaje.style.backgroundColor = secondarycolor;
 mensaje.border = "1px solid black";
 mensaje.innerText = "mensaje";
+mensaje.style.overflow = "scroll";
 
-mensaje.scrollTop = mensaje.scrollHeight;
 
 
 
@@ -218,8 +219,17 @@ contenidochat.appendChild(button);
 
 mensajechat.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
+    
       event.preventDefault();
-      button.onclick();
+      console.log("HHH")
+      button.style.backgroundColor = fifth;
+        setTimeout(() => {
+            button.style.backgroundColor = terciary;
+        }, 200);
+        numid =+ 1
+        crearChat1(mensajechat.value, numid);
+        mensaje.scrollTop = mensaje.scrollHeight;
+
     }
   });
 
@@ -228,8 +238,30 @@ button.addEventListener("click", function() {
     button.style.backgroundColor = fifth;
     setTimeout(() => {
       button.style.backgroundColor = terciary;
-    }, 2000);
+    }, 200);
+    numid =+ 1
+    crearChat1(mensajechat.value, numid);
+    mensaje.scrollTop = mensaje.scrollHeight;
+
+
 });
+
+
+
+function crearChat1(texto, idd){
+    let divchat = DOM.createElement("div");
+    console.log(texto)
+    divchat.className = "chat";
+    divchat.id = idd;
+    divchat.innerText = texto;
+    divchat.style.backgroundColor = fifth;
+    divchat.style.color = secondarycolor;
+    divchat.style.width = "100" + unitperc;
+    divchat.style.borderRadius = "2" + unitpx;
+    divchat.style.border ="1px solid white";
+    divchat.style.marginBottom = "2" + unitpx;
+    mensaje.appendChild(divchat);
+}
   
 
 
@@ -394,3 +426,5 @@ if(localStorage.getItem('theme') == "false"){
     button.style.backgroundColor = fourth;
     button.style.color = primarycolor;
 }
+
+
