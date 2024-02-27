@@ -2,9 +2,6 @@
 
 
 
-
-
-
 DOM = document;
 
 // Paleta de Colores: https://paletadecolores.com.mx/paleta/11091a/2f2f4d/626970/bab195/e8d18e/
@@ -20,6 +17,7 @@ let numid = 0;
 
 
 
+let usuarioname = "The Weekend";
 
 //Dimensiones
 const unitvh = 'vh';
@@ -65,7 +63,7 @@ divcontenidoperf.style.display = "flex";
 divcontenidoperf.style.alignItems = "center";
 divcontenidoperf.style.justifyContent = "space-around";
 divcontenidoperf.innerText = "Paddington";
-divcontenidoperf.style.color = fifth;
+divcontenidoperf.style.color = "white";
 
 
 
@@ -75,7 +73,8 @@ let mensaje = DOM.createElement("div");
 mensaje.style.backgroundColor = secondarycolor;
 mensaje.border = "1px solid black";
 mensaje.innerText = "mensaje";
-mensaje.style.overflow = "scroll";
+mensaje.style.overflowY = "scroll";
+
 
 
 
@@ -101,7 +100,7 @@ let imagenperfil = DOM.createElement("img");
 imagenperfil.style.borderRadius = "50" + unitperc;
 imagenperfil.style.width = "65px"
 imagenperfil.style.height = "65px"
-imagenperfil.src = "data:image/jpeg;base64,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"
+imagenperfil.src = "https://img.asmedia.epimg.net/resizer/VHO--PcuuklI_RkAQxXHdO2ecGE=/1200x1200/filters:focal(562x275:572x285)/cloudfront-eu-central-1.images.arcpublishing.com/diarioas/SLLW3EYCTFLJVCYCVZQMJY2UF4.jpg"
 imagenperfil.alt = "Foto"
 divcontenidoperf.appendChild(imagenperfil);
 
@@ -205,7 +204,7 @@ mensajechat.style.color = fifth;
 
 
 
-
+//PAra el POST
 contenidochat.appendChild(mensajechat);
 
 let button = DOM.createElement("button");
@@ -247,22 +246,29 @@ button.addEventListener("click", function() {
 });
 
 
-
+//Creta
 function crearChat1(texto, idd){
     let divchat = DOM.createElement("div");
     console.log(texto)
     divchat.className = "chat";
     divchat.id = idd;
-    divchat.innerText = texto;
+    divchat.innerText = usuarioname + "\n" + texto;
     divchat.style.backgroundColor = fifth;
-    divchat.style.color = secondarycolor;
-    divchat.style.width = "100" + unitperc;
-    divchat.style.borderRadius = "2" + unitpx;
+    divchat.style.position = "relative";
+    divchat.style.right = "60%";
+    divchat.style.color = "white";
+    divchat.style.width = "40" + unitperc;
+    divchat.style.minHeight = "55" + unitpx;
+    divchat.style.borderRadius = "8" + unitpx;
     divchat.style.border ="1px solid white";
+    divchat.style.right = "-60" + unitperc
     divchat.style.marginBottom = "2" + unitpx;
+    divchat.style.wordWrap = "break-word";
     mensaje.appendChild(divchat);
+
+    
 }
-  
+
 
 
 
@@ -280,7 +286,7 @@ DOM.body.appendChild(divconten);
 
 
 
-let data = fetch('https://jsonplaceholder.typicode.com/posts',
+let data = fetch('http://uwu-guate.site:3000/messages',
 {
     method: 'GET',
     headers: {
@@ -289,14 +295,14 @@ let data = fetch('https://jsonplaceholder.typicode.com/posts',
     body : JSON.stringify({})
 })    
 function optenerPost2(){
-    let posts = fetch('https://jsonplaceholder.typicode.com/posts')
+    let posts = fetch('http://uwu-guate.site:3000/messages')
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.log(error));
 }
 // ASYNC AWAIT - ME PERMITE ESPERAR LA RESPUESTA DE UNA PETICION ASINCRONA
 async function optenerPosts(){
-    let data = await fetch('https://jsonplaceholder.typicode.com/posts',
+    let data = await fetch('http://uwu-guate.site:3000/messages',
     {
         method: 'GET',
         headers: {
@@ -305,6 +311,7 @@ async function optenerPosts(){
     })    
     console.log("await", data);
     let posts = await data.json();
+    posts = posts.reverse();
     console.log(posts);
 
     // console.log("string", JSON.stringify(posts));
@@ -313,11 +320,13 @@ async function optenerPosts(){
     return posts;
 }
 
-function crearChat(texto, id){
-    let divchat = DOM.createElement("div");
+function crearChatbut(username, id){
+    let divchat = DOM.createElement("button");
     divchat.className = "chat";
     divchat.id = id;
-    divchat.innerText = texto;
+    divchat.innerText = username;
+    divchat.style.textAlign = "Center";
+    divchat.style.justifyContent = "space-around";
     divchat.style.backgroundColor = fifth;
     divchat.style.color = secondarycolor;
     divchat.style.width = "100" + unitperc;
@@ -328,21 +337,70 @@ function crearChat(texto, id){
     return divchat;
 }
 
+
+//Crea en los listados los usuarios de CHAT
+async function crearListoDeChatsUsers(){
+    // mando a traer los post dummys a una api con get
+    let misPosts =  await optenerPosts()
+
+    const uniqueusers = [];
+    for (const usernamepost of misPosts) {
+        if (!uniqueusers.includes(usernamepost[1])) {
+            uniqueusers.push(usernamepost[1]);
+        }
+      }
+    console.log(uniqueusers);
+    
+    // mando a traer el div donde quiero poner los chats
+    let divListados = divchatlist;
+    
+    if(divListados != null){
+        // transformamos los dicccionarios a un div de chat
+        for (const usuario of uniqueusers)
+            divListados.appendChild(crearChatbut(usuario, usuario));
+
+    }
+
+}
+crearListoDeChatsUsers();
+
+
+function crearChat(username, id, mensaje){
+    let divchat = DOM.createElement("div");
+    divchat.className = "chat";
+    divchat.id = id;
+    divchat.innerText = username + "\n" + mensaje;
+    divchat.style.backgroundColor = fifth;
+    divchat.style.color = secondarycolor;
+    divchat.style.width = "40" + unitperc;
+    divchat.style.borderRadius = "8" + unitpx;
+    divchat.style.border ="1px solid black";
+    divchat.style.marginBottom = "8" + unitpx;
+    return divchat;
+}
+
+
+
+
+//REgresa
 async function crearListoDeChats(){
     // mando a traer los post dummys a una api con get
     let misPosts =  await optenerPosts()
     
     // mando a traer el div donde quiero poner los chats
-    let divListados = document.getElementById("listachat");
+    let divListados = divchatlist;
+
     if(divListados != null){
         // transformamos los dicccionarios a un div de chat
+        
         misPosts.map(post=>{
-            let divchat = crearChat(post.title, post.id);
+            let divchat = crearChat(post[1], post[0], post[2]);
             return divchat
         })
         // recorremos los nuevos chats y los agremos al div de listados
         .forEach(element => {
-            divListados.appendChild(element);
+            mensaje.appendChild(element);
+            
         });
     }
 
@@ -352,6 +410,13 @@ crearListoDeChats();
 
 
 
+
+
+
+
+
+
+//Parte 1 NO TOCAR
 const texto = mensajechat;
 function updateCharacterCount() {
     const currentLength = texto.value.length;
