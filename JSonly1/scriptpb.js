@@ -4,6 +4,7 @@
 
 DOM = document;
 
+
 // Paleta de Colores: https://paletadecolores.com.mx/paleta/11091a/2f2f4d/626970/bab195/e8d18e/
 
 
@@ -14,10 +15,10 @@ let terciary = "#efeae4";
 let fourth = "#373737";
 let fifth = "#373737";
 let numid = 0;
+let uniqueusers = [];
 
-
-
-let usuarioname = "The Weekend";
+let globalcounter = 1;
+let usuarioname = 'The Weekend';
 
 //Dimensiones
 const unitvh = 'vh';
@@ -62,18 +63,28 @@ divcontenidoperf.style.backgroundColor = primarycolor;
 divcontenidoperf.style.display = "flex";
 divcontenidoperf.style.alignItems = "center";
 divcontenidoperf.style.justifyContent = "space-around";
-divcontenidoperf.innerText = "Paddington";
+divcontenidoperf.innerText = usuarioname;
 divcontenidoperf.style.color = "white";
 
 
 
 
-//Mensajes
+//"mensajes"
 let mensaje = DOM.createElement("div");
 mensaje.style.backgroundColor = secondarycolor;
 mensaje.border = "1px solid black";
-mensaje.innerText = "mensaje";
 mensaje.style.overflowY = "scroll";
+mensaje.style.overflowX = "hidden";
+
+let busqueda = DOM.createElement("input");
+busqueda.placeholder = "Busqueda filtrada al terminar de escribir apachar afuera de la caja";
+busqueda.style.width ="80%";
+busqueda.style.height = "10%";
+busqueda.style.margin = "10px";
+busqueda.style.marginBottom = "16px";
+busqueda.style.marginLeft = "10%";
+mensaje.appendChild(busqueda)
+
 
 
 
@@ -146,12 +157,10 @@ buttonlight.addEventListener("click", function() {
     mensajechat.style.color = fifth;
     button.style.backgroundColor = fourth;
     button.style.color = primarycolor;
-    divchat.style.backgroundColor = fifth;
-    divchat.style.color = secondarycolor;
 
     
       // Change to your desired color
-  });
+});
 
 
 
@@ -184,9 +193,6 @@ buttondark.addEventListener("click", function() {
     mensajechat.style.color = fifth;
     button.style.backgroundColor = fourth;
     button.style.color = primarycolor;
-    divchat.style.backgroundColor = fifth;
-    divchat.style.color = secondarycolor;
-
 
       // Change to your desired color
   });
@@ -220,7 +226,7 @@ mensajechat.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
     
       event.preventDefault();
-      console.log("HHH")
+      console.log("Cuando presiono el Click")
       button.style.backgroundColor = fifth;
         setTimeout(() => {
             button.style.backgroundColor = terciary;
@@ -229,10 +235,37 @@ mensajechat.addEventListener("keypress", function(event) {
         crearChat1(mensajechat.value, numid);
         mensaje.scrollTop = mensaje.scrollHeight;
 
+        
+
+        //POSTS
+
+        fetch('http://uwu-guate.site:3000/messages', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: usuarioname,
+                message: mensajechat.value
+            })
+        })
+        .then(response => response.json())
+        .then(data =>{
+            console.log(data);
+        })
+        .catch(error=>{
+            console.log(error);
+        });
+
+
+
+
     }
   });
 
 button.addEventListener("click", function() {
+
+    console.log("Evento del click")
     
     button.style.backgroundColor = fifth;
     setTimeout(() => {
@@ -241,6 +274,27 @@ button.addEventListener("click", function() {
     numid =+ 1
     crearChat1(mensajechat.value, numid);
     mensaje.scrollTop = mensaje.scrollHeight;
+
+
+    fetch('http://uwu-guate.site:3000/messages', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: usuarioname,
+            message: mensajechat.value
+        })
+    })
+    .then(response => response.json())
+    .then(data =>{
+        console.log(data);
+    })
+    .catch(error=>{
+        console.log(error);
+    });
+
+
 
 
 });
@@ -294,12 +348,7 @@ let data = fetch('http://uwu-guate.site:3000/messages',
     },
     body : JSON.stringify({})
 })    
-function optenerPost2(){
-    let posts = fetch('http://uwu-guate.site:3000/messages')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.log(error));
-}
+
 // ASYNC AWAIT - ME PERMITE ESPERAR LA RESPUESTA DE UNA PETICION ASINCRONA
 async function optenerPosts(){
     let data = await fetch('http://uwu-guate.site:3000/messages',
@@ -313,6 +362,7 @@ async function optenerPosts(){
     let posts = await data.json();
     posts = posts.reverse();
     console.log(posts);
+    globalcounter = posts.length;
 
     // console.log("string", JSON.stringify(posts));
     // let new_json = JSON.parse(JSON.stringify(posts));
@@ -322,7 +372,7 @@ async function optenerPosts(){
 
 function crearChatbut(username, id){
     let divchat = DOM.createElement("button");
-    divchat.className = "chat";
+    divchat.className = "chatbutton";
     divchat.id = id;
     divchat.innerText = username;
     divchat.style.textAlign = "Center";
@@ -334,8 +384,24 @@ function crearChatbut(username, id){
     divchat.style.borderRadius = "8" + unitpx;
     divchat.style.border ="1px solid black";
     divchat.style.marginBottom = "8" + unitpx;
+    //Crea codigo aqui
+    divchat.addEventListener("click", function() {
+    console.log("Me apacho");
+    let i = 1;
+    while(i <= globalcounter){
+        if(DOM.getElementById(i + "").innerText.startsWith(divchat.innerText) == false){
+            console.log("delete from")
+            mensaje.removeChild(DOM.getElementById(i + ""))
+        }
+        
+        i++;
+        
+        }
+    });
+
     return divchat;
 }
+
 
 
 //Crea en los listados los usuarios de CHAT
@@ -343,7 +409,7 @@ async function crearListoDeChatsUsers(){
     // mando a traer los post dummys a una api con get
     let misPosts =  await optenerPosts()
 
-    const uniqueusers = [];
+    
     for (const usernamepost of misPosts) {
         if (!uniqueusers.includes(usernamepost[1])) {
             uniqueusers.push(usernamepost[1]);
@@ -376,7 +442,9 @@ function crearChat(username, id, mensaje){
     divchat.style.borderRadius = "8" + unitpx;
     divchat.style.border ="1px solid black";
     divchat.style.marginBottom = "8" + unitpx;
+    divchat.style.wordWrap = "break-word";
     return divchat;
+    
 }
 
 
@@ -401,15 +469,13 @@ async function crearListoDeChats(){
         .forEach(element => {
             mensaje.appendChild(element);
             
+            
         });
     }
 
 }
 
 crearListoDeChats();
-
-
-
 
 
 
@@ -443,6 +509,9 @@ texto.addEventListener("input", (event) => {
 
 
 updateCharacterCount();
+
+
+
 
 
 if(localStorage.getItem('theme') == "true"){
@@ -493,3 +562,17 @@ if(localStorage.getItem('theme') == "false"){
 }
 
 
+
+
+
+//Ideas ya me queme entonces hay que utilizar los remove con el for que tengo al momento de presionar el boton.
+
+// while(i <= globalcounter){
+    // if(DOM.getElementById(i + "").innerText.startsWith(divchat.innerText) == false){
+        // console.log("delete from")
+        // mensaje.removeChild(DOM.getElementById(i + ""))
+    // }
+    
+    // i++;
+    
+    // }
