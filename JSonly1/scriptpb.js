@@ -19,6 +19,9 @@ let uniqueusers = [];
 
 let globalcounter = 1;
 let usuarioname = 'The Weekend';
+let globalarray = [];
+let globaldic = {};
+let veces = 0
 
 //Dimensiones
 const unitvh = 'vh';
@@ -66,7 +69,25 @@ divcontenidoperf.style.justifyContent = "space-around";
 divcontenidoperf.innerText = usuarioname;
 divcontenidoperf.style.color = "white";
 
+function validarURL(str) {
+    const patron = new RegExp("^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$");
+    return patron.test(str);
+}
 
+
+
+function eliminardatos(){
+    let i = 1;
+    while(i <= globalcounter){
+        mensaje.removeChild(DOM.getElementById(i + ""))
+        i++;
+        }
+}
+
+function eliminardatospec(i){
+        mensaje.removeChild(i)
+        
+}
 
 
 //"mensajes"
@@ -77,13 +98,51 @@ mensaje.style.overflowY = "scroll";
 mensaje.style.overflowX = "hidden";
 
 let busqueda = DOM.createElement("input");
-busqueda.placeholder = "Busqueda filtrada al terminar de escribir apachar afuera de la caja";
-busqueda.style.width ="80%";
+busqueda.placeholder = "Busqueda filtrada al terminar de escribir mover afuera el mouse";
+busqueda.style.width ="60%";
 busqueda.style.height = "10%";
 busqueda.style.margin = "10px";
 busqueda.style.marginBottom = "16px";
 busqueda.style.marginLeft = "10%";
-mensaje.appendChild(busqueda)
+
+busqueda.addEventListener("mouseout", function(){
+    
+    const texto = this.value;
+    crearfiltro(texto);
+})
+
+
+mensaje.appendChild(busqueda);
+
+
+
+
+let aurefreshtext = DOM.createElement("text");
+aurefreshtext.innerText = "Auto refresh 10s";
+aurefreshtext.style.backgroundColor = fourth;
+aurefreshtext.style.color = secondarycolor;
+aurefreshtext.style.border = "1px solid black";
+
+let aurefresh = DOM.createElement("input");
+aurefresh.type = "checkbox";
+aurefresh.style.width = "40px";
+aurefresh.style.marginLeft = "120px"
+
+aurefresh.addEventListener("change", function(){
+    console.log(globalcounter);
+    if(this.checked === true){
+       saidinterval = setInterval( function(){
+            eliminardatos();
+            crearListoDeChats();
+        }, 10000)
+    }
+    else if (this.checked === false){
+        clearInterval(saidinterval)
+    }
+});
+
+mensaje.appendChild(aurefresh);
+mensaje.appendChild(aurefreshtext); 
 
 
 
@@ -157,6 +216,8 @@ buttonlight.addEventListener("click", function() {
     mensajechat.style.color = fifth;
     button.style.backgroundColor = fourth;
     button.style.color = primarycolor;
+    aurefreshtext.style.backgroundColor = fourth;
+    aurefreshtext.style.color = secondarycolor;
 
     
       // Change to your desired color
@@ -193,6 +254,8 @@ buttondark.addEventListener("click", function() {
     mensajechat.style.color = fifth;
     button.style.backgroundColor = fourth;
     button.style.color = primarycolor;
+    aurefreshtext.style.backgroundColor = fourth;
+    aurefreshtext.style.color = secondarycolor;
 
       // Change to your desired color
   });
@@ -336,8 +399,9 @@ divconten.appendChild(contenidochat);
 
 DOM.body.appendChild(divconten);
 
-
-
+//Aqui va el link preview entonces poner la funcion por Lud
+//si lo valida entonces agregar dentro del get element by id una foto
+//luego utilizar etiqueta a para poner el href
 
 
 let data = fetch('http://uwu-guate.site:3000/messages',
@@ -360,7 +424,6 @@ async function optenerPosts(){
     })    
     console.log("await", data);
     let posts = await data.json();
-    posts = posts.reverse();
     console.log(posts);
     globalcounter = posts.length;
 
@@ -369,6 +432,7 @@ async function optenerPosts(){
     // console.log("new_json", new_json);
     return posts;
 }
+
 
 function crearChatbut(username, id){
     let divchat = DOM.createElement("button");
@@ -393,9 +457,7 @@ function crearChatbut(username, id){
             console.log("delete from")
             mensaje.removeChild(DOM.getElementById(i + ""))
         }
-        
         i++;
-        
         }
     });
 
@@ -408,11 +470,12 @@ function crearChatbut(username, id){
 async function crearListoDeChatsUsers(){
     // mando a traer los post dummys a una api con get
     let misPosts =  await optenerPosts()
+    console.log(misPosts);
 
     
     for (const usernamepost of misPosts) {
-        if (!uniqueusers.includes(usernamepost[1])) {
-            uniqueusers.push(usernamepost[1]);
+        if (!uniqueusers.includes(usernamepost["username"])) {
+            uniqueusers.push(usernamepost["username"]);
         }
       }
     console.log(uniqueusers);
@@ -443,7 +506,37 @@ function crearChat(username, id, mensaje){
     divchat.style.border ="1px solid black";
     divchat.style.marginBottom = "8" + unitpx;
     divchat.style.wordWrap = "break-word";
+
+    let elarray = mensaje.split("http")
+    let cont = 1
+    
+    while(cont < elarray.length){
+        if(validarURL( "http" + elarray[cont]) == true){
+            divchat.innerText = username + "\n";
+            console.log("detectado por" + username)
+            let img = DOM.createElement("img");
+            img.style.width = "250px"
+            img.src = "http" + elarray[cont];
+            let link = DOM.createElement("a");
+            link.setAttribute('href', "http" + elarray[cont] );
+            link.textContent = "\n" + "http" + elarray[cont] + "\n";
+            link.style.color = "white";
+            divchat.appendChild(link);
+            divchat.appendChild(img);
+            console.log(link);
+
+        }
+        else{
+            divchat.innerText = username + "\n" + mensaje;
+        }
+        cont = cont + 2
+
+
+    }
+
+
     return divchat;
+    
     
 }
 
@@ -462,13 +555,17 @@ async function crearListoDeChats(){
         // transformamos los dicccionarios a un div de chat
         
         misPosts.map(post=>{
-            let divchat = crearChat(post[1], post[0], post[2]);
+                //Antes validar un URL
+
+            let divchat = crearChat(post["username"], post["id"], post["content"]);
+
+            globalarray.push(post["content"]);
+            globaldic[post["id"]] = post["content"];
             return divchat
         })
         // recorremos los nuevos chats y los agremos al div de listados
         .forEach(element => {
             mensaje.appendChild(element);
-            
             
         });
     }
@@ -476,6 +573,26 @@ async function crearListoDeChats(){
 }
 
 crearListoDeChats();
+
+function crearfiltro(mensaje){
+    // mando a traer los post dummys a una api con get
+    console.log(globalarray)
+    let changes = globalarray.filter(str => str.includes(mensaje))
+    console.log(changes)
+    console.log(globaldic)
+
+    let b = 1
+    while( b  <= globalcounter){
+        elements = DOM.getElementById(b + "");
+            if (elements.innerText.includes(changes[1]) == false){
+                eliminardatospec(elements);
+            }
+            
+        
+        b++;
+        
+    }
+}
 
 
 
@@ -535,6 +652,9 @@ if(localStorage.getItem('theme') == "true"){
     mensajechat.style.color = fifth;
     button.style.backgroundColor = fourth;
     button.style.color = primarycolor;
+    aurefreshtext.style.backgroundColor = fourth;
+    aurefreshtext.style.color = secondarycolor;
+
 
 }
 
@@ -559,20 +679,8 @@ if(localStorage.getItem('theme') == "false"){
     mensajechat.style.color = fifth;
     button.style.backgroundColor = fourth;
     button.style.color = primarycolor;
+    aurefreshtext.style.backgroundColor = fourth;
+    aurefreshtext.style.color = secondarycolor;
 }
 
 
-
-
-
-//Ideas ya me queme entonces hay que utilizar los remove con el for que tengo al momento de presionar el boton.
-
-// while(i <= globalcounter){
-    // if(DOM.getElementById(i + "").innerText.startsWith(divchat.innerText) == false){
-        // console.log("delete from")
-        // mensaje.removeChild(DOM.getElementById(i + ""))
-    // }
-    
-    // i++;
-    
-    // }
