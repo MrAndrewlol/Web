@@ -1,6 +1,7 @@
-import conn from './connection.js'
 
-export async function getAllMessages() {
+import conn from './conn.js'
+
+export async function getAllPosts() {
     try {
         const [rows] = await conn.query('SELECT * FROM blogs')
         return rows
@@ -11,10 +12,34 @@ export async function getAllMessages() {
     }
 }
 
-export async function createMessage(title, message) {
+export async function getPosts(id) {
+    try{
+        console.log(id)
+        const [rows] = await conn.query(`SELECT * FROM blogs WHERE id = ${id}`)
+        return rows
+    }catch(e){
+        console.log(e)
+        return e
+    }
+
+}  
+
+export async function createPost(title, content) {
     try {
-        const [result] = await conn.query(`INSERT INTO blogs (title, content) VALUES ('${title}', '${message}')`)
-        return result
+        const [rows] = await conn.query(`INSERT INTO blogs (title, content) VALUES ('${title}', '${content}')`)
+        return rows
+
+    } catch (e) {
+        console.log(e)
+        return e
+    }
+ }
+
+
+export async function deletepost(id) {
+    try {
+        const [rows] = await conn.query(`DELETE FROM blogs WHERE id = ${id}`)
+        return rows
 
     } catch (e) {
         console.log(e)
@@ -22,14 +47,11 @@ export async function createMessage(title, message) {
     }
 }
 
-export async function createDatabase() {
+export async function putpost(id, title ,content) {
     try {
-        const [result] = await conn.query(`CREATE TABLE IF NOT EXISTS blogs (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(255) NOT NULL,
-            content TEXT NOT NULL
-        );`)
-        return result
+        const [rows] = await conn.query(` UPDATE blogs SET title = '${title}', content = '${content}' WHERE id = '${id}'`)
+        return rows
+
     } catch (e) {
         console.log(e)
         return e

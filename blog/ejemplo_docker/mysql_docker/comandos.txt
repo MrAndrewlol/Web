@@ -28,3 +28,4 @@ localhost 33068
 
 usuario
 mysql_blogjo
+
