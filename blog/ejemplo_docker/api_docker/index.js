@@ -49,3 +49,11 @@ app.put('/posts/:id', async (req, res) => {
   const result = await putpost(id, title, content)
   res.json(result)
 })
+
+//Excepciones de error
+
+app.use((req, res, next) => {
+  const err = new Error('Endpoint no encontrado');
+  err.status = 404;
+  next("Error: "+ err.status + "No encontrado");
+});

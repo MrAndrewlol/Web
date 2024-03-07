@@ -5,7 +5,9 @@ export async function getAllPosts() {
     const [rows] = await conn.query('SELECT * FROM blogs')
     return rows
   } catch (e) {
-    console.log(e)
+    if(e.errno === -111){
+      console.log("Error 500 Problema al contactar con la base de datos.")
+    }
     return e
   }
 }
