@@ -3,32 +3,27 @@ import conn from './conn.js'
 export async function getAllPosts() {
   try {
     const [rows] = await conn.query('SELECT * FROM blogs')
+
     return rows
   } catch (e) {
-    if(e.errno === -111){
-      console.log("Error 500 Problema al contactar con la base de datos.")
-    }
     return e
   }
 }
 
 export async function getPosts(id) {
   try {
-    console.log(id)
     const [rows] = await conn.query(`SELECT * FROM blogs WHERE id = ${id}`)
     return rows
   } catch (e) {
-    console.log(e)
     return e
   }
 }
 
-export async function createPost(title, content) {
+export async function createPost(title, carname, model, content, imagen) {
   try {
-    const [rows] = await conn.query(`INSERT INTO blogs (title, content) VALUES ('${title}', '${content}')`)
+    const [rows] = await conn.query(`INSERT INTO blogs (title, nombre_carro, modelo_carro, contenido,  imagen)  VALUES ('${title}', '${carname}','${model}','${content}', '${imagen}')`)
     return rows
   } catch (e) {
-    console.log(e)
     return e
   }
 }
@@ -38,17 +33,15 @@ export async function deletepost(id) {
     const [rows] = await conn.query(`DELETE FROM blogs WHERE id = ${id}`)
     return rows
   } catch (e) {
-    console.log(e)
     return e
   }
 }
 
-export async function putpost(id, title, content) {
+export async function putpost(id, title, carname, model, content, imagen) {
   try {
-    const [rows] = await conn.query(` UPDATE blogs SET title = '${title}', content = '${content}' WHERE id = '${id}'`)
+    const [rows] = await conn.query(` UPDATE blogs SET title = '${title}', nombre_carro = '${carname}', modelo_carro = '${model}' ,contenido = '${content}', imagen = '${imagen}' WHERE id = '${id}'`)
     return rows
   } catch (e) {
-    console.log(e)
     return e
   }
 }
