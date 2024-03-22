@@ -15,8 +15,6 @@ function Carrazo(){
 
 
 function Recentopinion(){
-
-
     return(
 
         <div style = {{display:"flex", marginTop:"10%", marginRight:"1%" ,textAlign:"justify", width:"100%" }} >
@@ -43,7 +41,10 @@ function Recentopinion(){
 }
 
 // #Utilizar los props
-async function OtherRandomopinions(){
+ function OtherRandomopinions(){
+
+
+
 
     return(
         <div  style={{backgroundColor:'#b0a18f', marginTop:"2%", height:"30vh", overflowY: "auto" }}>
@@ -107,9 +108,25 @@ ReactDOM.render(
 );
 
 
-// Fetch de la api 
+
 
 
 
 
 // Colores: https://paletadecolores.com.mx/paleta/429398/6b5d4d/b0a18f/dfcdb4/fbeed3/
+
+// // Fetch de la api 
+// async function gettingPosts(){
+    // let data =  fetch('http://127.0.0.1:3000/posts',
+    // {
+        // method: 'GET',
+        // headers: {
+            // 'Content-Type': 'application/json'
+        // },
+    // })
+    // console.log("await", data);
+    // let posts = await data.json();
+    // console.log(posts);
+    // return posts;
+// }
+
