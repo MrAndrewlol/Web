@@ -9,6 +9,9 @@ import {
 const app = express()
 const port = 3000
 
+app.use(cors())
+
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
@@ -32,13 +35,16 @@ app.get('/posts', async (req, res) => {
 
   res.json(posts)
 
-  const dia = new Date()
+  try{
+    const dia = new Date()
 
   data = `${data}\n Fecha: ${dia}\n Mostrar, Endpoint: http://127.0.0.1:3000/posts \n${JSON.stringify(posts)}`
 
   fs.writeFile('log.txt', (data), (err) => {
     if (err) throw err
   })
+  } catch(err){
+  }
 })
 
 app.get('/posts/:id', async (req, res) => {
@@ -50,13 +56,18 @@ app.get('/posts/:id', async (req, res) => {
   const { id } = req.params
   const posts = await getPosts(id)
   res.json(posts)
-  const dia = new Date()
 
-  data = `${data}\n Fecha: ${dia}\n Mostrar, Endpoint: http://127.0.0.1:3000/${id} \n${JSON.stringify(posts)}`
+  try{
+    const dia = new Date()
 
-  fs.writeFile('log.txt', (data), (err) => {
-    if (err) throw err
-  })
+    data = `${data}\n Fecha: ${dia}\n Mostrar, Endpoint: http://127.0.0.1:3000/${id} \n${JSON.stringify(posts)}`
+  
+    fs.writeFile('log.txt', (data), (err) => {
+      if (err) throw err
+    })
+  }catch(err){
+  }
+
 })
 
 app.post('/posts', async (req, res) => {
@@ -75,14 +86,18 @@ app.post('/posts', async (req, res) => {
   const blogs = await createPost(title, nombrecarro, modelocarro, content, imagen)
   res.json(blogs)
 
-  const dia = new Date()
+  try{
+    const dia = new Date()
 
-  data = `${data}\n Fecha: ${dia}\n Ingresar un elemento, Endpoint: http://127.0.0.1:3000/:postid \n
-  title:${title} , nombrecarro: ${nombrecarro},modelocarro: ${modelocarro}, content: ${content}, imagen: ${imagen}`
-
-  fs.writeFile('log.txt', (data), (err) => {
-    if (err) throw err
-  })
+    data = `${data}\n Fecha: ${dia}\n Ingresar un elemento, Endpoint: http://127.0.0.1:3000/:postid \n
+    title:${title} , nombrecarro: ${nombrecarro},modelocarro: ${modelocarro}, content: ${content}, imagen: ${imagen}`
+  
+    fs.writeFile('log.txt', (data), (err) => {
+      if (err) throw err
+    })
+  }
+  catch(err){
+  }
 })
 
 app.delete('/posts/:id', async (req, res) => {
@@ -96,13 +111,17 @@ app.delete('/posts/:id', async (req, res) => {
   const result = await deletepost(id)
   res.json(result)
 
-  const dia = new Date()
+  try{
+    const dia = new Date()
 
   data = `${data}\n Fecha: ${dia}\n Eliminar, Endpoint: http://127.0.0.1:3000/${id} \n}`
 
   fs.writeFile('log.txt', (data), (err) => {
     if (err) throw err
   })
+  }catch(error){
+
+  }
 })
 
 app.put('/posts/:id', async (req, res) => {
@@ -121,6 +140,8 @@ app.put('/posts/:id', async (req, res) => {
   }
   const result = await putpost(id, title, nombrecarro, modelocarro, content, imagen)
   res.json(result)
+  
+  try{
   const dia = new Date()
   data = `${data}\n Fecha: ${dia}\n Eliminar, Endpoint: http://127.0.0.1:3000/${id} \n
   title:${title} , nombrecarro: ${nombrecarro},modelocarro: ${modelocarro}, content: ${content}, imagen: ${imagen}`
@@ -128,20 +149,11 @@ app.put('/posts/:id', async (req, res) => {
   fs.writeFile('log.txt', (data), (err) => {
     if (err) throw err
   })
+
+  }catch(err){
+    
+  }
+
 })
-
-// Excepciones de error
-
-app.use((req, res, next) => {
-  const err = new Error('Endpoint no encontrado')
-  err.status = 404
-  next(`Error: ${err.status}No encontrado`)
-})
-
-app.use(cors({
-  origin: 'http://127.0.0.1:3000/',
-}))
-
-
 
 //Babel pero en nuestro codigo?
