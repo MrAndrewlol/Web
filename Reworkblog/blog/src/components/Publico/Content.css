@@ -1,0 +1,22 @@
+.estructuraC{
+    background-color: rgb(76, 148, 211);
+    width: 28%;
+    min-height: 20vh;
+    margin: 2.5%;
+    
+}
+
+
+.backfoto{
+    min-height: 60%;
+    width: 100%;
+    background-size: cover;
+    border-radius: 2%;
+}
+
+.nombret{
+    background-color: rgb(142, 151, 151);
+    margin-top: 0%;
+    word-wrap: break-word;
+    margin-inline-start: auto;
+}

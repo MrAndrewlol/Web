@@ -1,8 +1,17 @@
+import './Home.css'
+
+import Listacontent from './Listadecontenidos.jsx'
+
+
 function Home() {
     return (
       <div>
-          <h1>Casa</h1>
-          <p>Bienvenido este es el home la clase</p>
+          <div>
+          <img className='imagencarro' src='https://i.ytimg.com/vi/gAcSYTuzst0/maxresdefault.jpg'></img>
+            <h1 className='titulo'>CAR BLOG</h1>
+            <Listacontent></Listacontent>
+          </div>
+          
       </div>
     )
   }

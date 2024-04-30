@@ -1,7 +1,7 @@
 import Adminpage from "../components/Admin/Admenu"
 import Login from "../components/Admin/Login"
 import Home from "../components/Publico/Homepage"
-import PropTypes from 'prop-types'
+import proptypes from 'prop-types'
 /* eslint-disable react/prop-types */
 
 function Routers({ ruta }) {
@@ -22,8 +22,8 @@ function Routers({ ruta }) {
     }
 }   
 
-Routers.PropTypes ={
-    ruta: PropTypes.string
+Routers.proptypes ={
+    ruta: proptypes.string
 }
 
 
