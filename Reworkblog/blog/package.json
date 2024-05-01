@@ -11,12 +11,16 @@
     "start": "node src/components/Api/api_docker/index.js"
   },
   "dependencies": {
+    "@nextui-org/popover": "^2.1.21",
+    "@popperjs/core": "^2.11.8",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "fs": "^0.0.1-security",
     "mysql2": "^3.9.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
+    "react-popper": "^2.3.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
