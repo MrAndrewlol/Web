@@ -1,13 +1,18 @@
-import conn from './conn.js'
+import getClient from './conn.js'
+
+
+
+const client = getClient()
 
 export async function getAllPosts() {
   try {
-    const [rows] = await conn.query('SELECT * FROM blogs;')
-
-    return rows
-  } catch (e) {
-    return e
-  }
+    const result = await client.query(
+        'SELECT * FROM blogs'
+    )
+    return result.rows
+} catch (err) {
+    throw err
+}
 }
 
 export async function getPosts(id) {

@@ -1,15 +1,18 @@
-import mysql from 'mysql2/promise'
+import pkg from 'pg';
+const { Pool } = pkg;
 
-const pool = mysql.createPool({
-  host: 'localhost',
-  // host:'mysql',
-  port: 33068,
-  user: 'blog_user',
-  database: 'blog_db',
-  password: 'blog_password',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
+const conn = new  Pool({
+    user: 'postgres', //cars
+    host: 'localhost', //dpg-cop6d72cn0vc73dn8na0-a.oregon-postgres.render.com
+    database: 'postgres', //carblog
+    password: '7536', //OoVoOTUlKSgblmTyRlUvOedU1GPtALRf
+    port: 5432
+
 })
 
-export default pool
+
+const getClient = () =>{
+  return conn
+}
+
+export default getClient;
