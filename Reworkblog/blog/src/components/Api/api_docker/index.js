@@ -40,9 +40,8 @@ app.get('/posts/:id', async (req, res) => {
 })
 
 app.post('/posts', async (req, res) => {
-  const [title, nombrecarro, modelocarro, content] = [req.body.title,
-    req.body.nombre_carro, req.body.modelo_carro, req.body.contenido]
-  const { imagen } = req.body.imagen
+  const [title, nombrecarro, modelocarro, content, imagen] = [req.body.title,
+    req.body.nombre_carro, req.body.modelo_carro, req.body.contenido, req.body.imagen]
   if (imagen === 'undefined') {
     imagen = null
   }
@@ -58,15 +57,18 @@ app.delete('/posts/:id', async (req, res) => {
 })
 
 app.put('/posts/:id', async (req, res) => {
+
   const { id } = req.params
-  const [title, nombrecarro, modelocarro, content] = [req.body.title,
-    req.body.nombre_carro, req.body.modelo_carro, req.body.contenido]
-  const { imagen } = req.body.imagen
+
+  const [title, nombrecarro, modelocarro, content, imagen] = [req.body.title,
+    req.body.nombre_carro, req.body.modelo_carro, req.body.contenido, req.body.imagen]
   if (imagen === 'undefined') {
     imagen = null
   }
   const result = await putpost(id, title, nombrecarro, modelocarro, content, imagen)
   res.json(result)
+  
+  
 })
 
 //Babel pero en nuestro codigo?

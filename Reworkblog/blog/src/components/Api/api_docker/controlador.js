@@ -6,9 +6,8 @@ export async function conseguirPost(){
             'Content-Type': 'application/json'
         }
     })    
-    console.log("await", data);
-    let posts = await data.json();
-    console.log(posts);
+    let posts = data.json();
+    
     return posts;
 }
 

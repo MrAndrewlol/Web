@@ -1,21 +1,69 @@
 
 import './Listadoconten.css'
 import Contenido from './Content.jsx'
+import React, { useState, useEffect } from "react";
+import { conseguirPost } from '../Api/api_docker/controlador';
 
 function Listacontent(){
 
-    const datox = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    const das = btoa('https://upload.wikimedia.org/wikipedia/commons/c/c6/Paris_Motor_Show_2012_%288065248951%29.jpg')
-    const imagen = atob(das)
-    console.log(imagen)
+
+    const [data, setdata] = useState([{
+        "id": 1,
+        "title": "Nombres De Los Carros Teslas Son Raros",
+        "nombre_carro": "Model S,E,X,Y",
+        "modelo_carro": "2024",
+        "contenido": "De acuerdo con Elon Musk sus carros al juntar sus modelos se convierte en SEXY",
+        "imagen": "",
+        "fecha": "2024-04-04"
+      },
+      {
+        "id": 2,
+        "title": "BMW",
+        "nombre_carro": "M5",
+        "modelo_carro": "2024",
+        "contenido": "VROOM",
+        "imagen": "https://images.hgmsites.net/med/2021-bmw-5-series_100749425_m.jpg",
+        "fecha": "2024-04-01"
+      },
+      {
+        "id": 3,
+        "title": "Rayo Maqueen",
+        "nombre_carro": "Corvette",
+        "modelo_carro": "2024",
+        "contenido": "VROOM",
+        "imagen": "https://static.motor.es/fotos-noticias/2020/03/que-coche-es-rayo-mcqueen-202066150-1585635516_1.jpg",
+        "fecha": "2024-04-01"
+      }])
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const fetchedPosts = await conseguirPost();
+            setdata(fetchedPosts); // Update state with fetched data
+            console.log(data); // Log the data after it's set in state (optional)
+          } catch (error) {
+            console.error(error);
+          }
+        };
+    
+        fetchData();
+      }, []); // Empty dependency array: fetch data only on initial render
+    
 
     return (
         <div className='estructuralist'>
-        <Contenido name='El mejor carro de todos, Lindas vistas y todo para la familia' descripcion={datox} imagen='https://hips.hearstapps.com/hmg-prod/images/bmw-x5-2024-1600-03-1675845761.jpg'  ></Contenido>
+
+        {data.map((elemento) => (
+            
+            <Contenido  id={elemento.id} name={elemento.title} descripcion={elemento.contenido} imagen={elemento.imagen}></Contenido>
+        ))}
+        
+
+        {/* <Contenido name='El mejor carro de todos, Lindas vistas y todo para la familia' descripcion={datox} imagen='https://hips.hearstapps.com/hmg-prod/images/bmw-x5-2024-1600-03-1675845761.jpg'  ></Contenido>
         <Contenido name='ASH' descripcion={datox} imagen={imagen}></Contenido>
         <Contenido name='Juan' descripcion={datox} imagen='https://hips.hearstapps.com/hmg-prod/images/bmw-x5-2024-1600-03-1675845761.jpg'></Contenido>
         <Contenido name='Juan' descripcion={datox} imagen='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxw2QY5-OW7MCFPlNS2dZ88uCmCG9TiPqo2k941PM5Pg&s'></Contenido>
-        
+         */}
         </div>
 
     )
