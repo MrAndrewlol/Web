@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { conseguirPost, editarpost, eliminarunpost } from "../Api/api_docker/controlador";
+import { conseguirPost, editarpost, eliminarunpost, postear } from "../Api/api_docker/controlador";
 import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/popover";
 import './Admenu.css'
 
@@ -62,9 +62,21 @@ function Adminpage() {
   };
 
   const agregarDiv = (nuevoElemento) => {
-    const nuevoDiv = <div>{nuevoElemento}</div>;
   
-    
+  postear( title,nombre_carro, modelo_carro, contenido, imagen )
+
+    console.log(data.length)
+
+    const nuevoDiv = {
+      "id": data.length,
+    "title": title,
+    "nombre_carro": nombre_carro,
+    "modelo_carro": modelo_carro,
+    "contenido": contenido,
+    "imagen": imagen,
+    "fecha": new Date()
+    }
+
     setdata([...data, nuevoDiv]);
   };
 
@@ -83,12 +95,23 @@ function Adminpage() {
 
           <Popover placement="bottom" showArrow={true}>
         <PopoverTrigger>
-          <button ><p className='nombret'>Agregar un post</p></button>
+          <button ><p className='agregarbutton'>Agregar un post</p></button>
         </PopoverTrigger>
         <PopoverContent>
           <div className="anima" style={{backgroundColor:'#8D99AE'}}>
-          <p>{props.modelo} {props.years}</p>
-          <p style={{maxWidth:'80vw'}}>{props.descripcion}</p>
+          <div className="clasiinput">
+                Titulo:
+                  <input className="disinp" onChange={handletitle} placeholder="eg. El clasico"></input>
+                Nombre del Carro:
+                  <input className="disinp" onChange={handlenombrecar} placeholder="eg. BMW M4"></input>
+                Modelo del Carro:
+                  <input className="disinp" onChange={handlemodelo} placeholder="eg. 2024"></input>
+                Descripcion del Carro:
+                  <textarea className="disinp" onChange={handlecontenido} placeholder="Eg. El mejor carro de todos"></textarea>
+                  Link del Carro:
+                <textarea className="disinp"  onChange={handleimagen} placeholder="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9cI8du58seUd0y1LGBMhE1KCMqUApWaWeq0vL7nLIKg&s"></textarea>
+                <button className="submitbutton" onClick={agregarDiv}> Submit Post </button>  
+                </div>
           </div>
         </PopoverContent>
       </Popover>
@@ -150,45 +173,3 @@ function Adminpage() {
   
   export default Adminpage
 
-
-// {
-    // "id": 1,
-    // "title": "Nombres De Los Carros Teslas Son Raros",
-    // "nombre_carro": "Model S,E,X,Y",
-    // "modelo_carro": "2024",
-    // "contenido": "De acuerdo con Elon Musk sus carros al juntar sus modelos se convierte en SEXY",
-    // "imagen": "",
-    // "fecha": null
-//   },
-
-
-// const datos = [
-    //   {
-    //     "id": 1,
-    //     "title": "Nombres De Los Carros Teslas Son Raros",
-    //     "nombre_carro": "Model S,E,X,Y",
-    //     "modelo_carro": "2024",
-    //     "contenido": "De acuerdo con Elon Musk sus carros al juntar sus modelos se convierte en SEXY",
-    //     "imagen": "",
-    //     "fecha": "2024-04-04"
-    //   },
-    //   {
-    //     "id": 2,
-    //     "title": "BMW",
-    //     "nombre_carro": "M5",
-    //     "modelo_carro": "2024",
-    //     "contenido": "VROOM",
-    //     "imagen": "https://images.hgmsites.net/med/2021-bmw-5-series_100749425_m.jpg",
-    //     "fecha": "2024-04-01"
-    //   },
-    //   {
-    //     "id": 3,
-    //     "title": "Rayo Maqueen",
-    //     "nombre_carro": "Corvette",
-    //     "modelo_carro": "2024",
-    //     "contenido": "VROOM",
-    //     "imagen": "https://static.motor.es/fotos-noticias/2020/03/que-coche-es-rayo-mcqueen-202066150-1585635516_1.jpg",
-    //     "fecha": "2024-04-01"
-    //   }
-    
-    //]

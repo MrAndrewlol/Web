@@ -2,6 +2,7 @@ import Adminpage from "../components/Admin/Admenu"
 import Login from "../components/Admin/Login"
 import Home from "../components/Publico/Homepage"
 import proptypes from 'prop-types'
+import Contact from '../components/Contact/Contact'
 /* eslint-disable react/prop-types */
 
 function Routers({ ruta }) {
@@ -12,7 +13,8 @@ function Routers({ ruta }) {
             return <Login></Login>
         case "/adminpage": //Main Page
             return <Adminpage></Adminpage>
-            
+        case "/contact": //Contacto
+            return <Contact></Contact>
         default:
             return (
                 <div>
