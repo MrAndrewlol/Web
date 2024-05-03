@@ -61,6 +61,13 @@ function Adminpage() {
 
   };
 
+  const agregarDiv = (nuevoElemento) => {
+    const nuevoDiv = <div>{nuevoElemento}</div>;
+  
+    
+    setdata([...data, nuevoDiv]);
+  };
+
   const updateItemContent = (key, newContent, newTitle, newModleo, nombre_carro ,newimagen, newdate) => {
     setdata(
       data.map((elemento) => (elemento.id === key ? { ...elemento, contenido: newContent, title: newTitle, modelo_carro: newModleo, nombre_carro: nombre_carro ,imagen: newimagen, fecha: newdate } : elemento))
@@ -73,6 +80,22 @@ function Adminpage() {
 
         <>
         <h1>Main-Page</h1>
+
+          <Popover placement="bottom" showArrow={true}>
+        <PopoverTrigger>
+          <button ><p className='nombret'>Agregar un post</p></button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <div className="anima" style={{backgroundColor:'#8D99AE'}}>
+          <p>{props.modelo} {props.years}</p>
+          <p style={{maxWidth:'80vw'}}>{props.descripcion}</p>
+          </div>
+        </PopoverContent>
+      </Popover>
+
+       
+        
+
         <div className="wholes">
   
             {data.map(elemento => { return(
