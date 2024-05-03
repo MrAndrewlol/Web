@@ -15,7 +15,8 @@ function Contenido(props){
       </PopoverTrigger>
       <PopoverContent>
         <div className="anima" style={{backgroundColor:'#8D99AE'}}>
-          <p style={{maxWidth:'80vw'}}>{props.descripcion}</p>
+        <p>{props.modelo} {props.years}</p>
+        <p style={{maxWidth:'80vw'}}>{props.descripcion}</p>
         </div>
       </PopoverContent>
     </Popover>

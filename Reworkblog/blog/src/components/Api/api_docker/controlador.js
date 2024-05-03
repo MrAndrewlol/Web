@@ -84,12 +84,13 @@ export async function editarpost( id,title, nombrecarro, modelocarro, content, i
         "imagen": imagen,
         "fecha_publicacion": Date.now()
     }
+    console.log(object)
 
     try{
-        const data = await fetch(`http://127.0.0.1:3000/posts`,
+        const data = await fetch(`http://127.0.0.1:3000/posts/${id}`,
 
     {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },

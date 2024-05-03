@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { conseguirPost } from "../Api/api_docker/controlador";
+import { conseguirPost, editarpost, eliminarunpost } from "../Api/api_docker/controlador";
 import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/popover";
 import './Admenu.css'
 
@@ -7,9 +7,6 @@ import './Admenu.css'
 function Adminpage() {
 
   const day = new Date()
-  console.log() //year
-  console.log(day.getDate())//Dia
-  console.log(day.getMonth()+1)
 
 
 
@@ -44,53 +41,32 @@ function Adminpage() {
   
 
   useEffect(() => {
-    // Update the document title using the browser API
-    
-    const datos = conseguirPost()
+    const fetchData = async () => {
+      try {
+        const fetchedPosts = await conseguirPost();
+        setdata(fetchedPosts); // Update state with fetched data
+        console.log(data); // Log the data after it's set in state (optional)
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-    // const datos = [
-    //   {
-    //     "id": 1,
-    //     "title": "Nombres De Los Carros Teslas Son Raros",
-    //     "nombre_carro": "Model S,E,X,Y",
-    //     "modelo_carro": "2024",
-    //     "contenido": "De acuerdo con Elon Musk sus carros al juntar sus modelos se convierte en SEXY",
-    //     "imagen": "",
-    //     "fecha": "2024-04-04"
-    //   },
-    //   {
-    //     "id": 2,
-    //     "title": "BMW",
-    //     "nombre_carro": "M5",
-    //     "modelo_carro": "2024",
-    //     "contenido": "VROOM",
-    //     "imagen": "https://images.hgmsites.net/med/2021-bmw-5-series_100749425_m.jpg",
-    //     "fecha": "2024-04-01"
-    //   },
-    //   {
-    //     "id": 3,
-    //     "title": "Rayo Maqueen",
-    //     "nombre_carro": "Corvette",
-    //     "modelo_carro": "2024",
-    //     "contenido": "VROOM",
-    //     "imagen": "https://static.motor.es/fotos-noticias/2020/03/que-coche-es-rayo-mcqueen-202066150-1585635516_1.jpg",
-    //     "fecha": "2024-04-01"
-    //   }
-    
-    //]
-    setdata(datos)
-    console.log(datos)
-    console.log("datos", data)
-  },[]);
+    fetchData();
+  }, []); // Empty dependency array: fetch data only on initial render
+
 
   const removeItem = (key) => {
-    setdata(data.filter((elemento) => elemento.id !== key));
+    setdata(data.filter((elemento) => elemento.id !== key))
+    eliminarunpost(key)
+
   };
 
   const updateItemContent = (key, newContent, newTitle, newModleo, nombre_carro ,newimagen, newdate) => {
     setdata(
       data.map((elemento) => (elemento.id === key ? { ...elemento, contenido: newContent, title: newTitle, modelo_carro: newModleo, nombre_carro: nombre_carro ,imagen: newimagen, fecha: newdate } : elemento))
     );
+    editarpost( key, title, nombre_carro, modelo_carro, contenido, imagen )
+
   };
     if (localStorage.getItem("Login") === "true"){
       return (
@@ -161,3 +137,35 @@ function Adminpage() {
     // "imagen": "",
     // "fecha": null
 //   },
+
+
+// const datos = [
+    //   {
+    //     "id": 1,
+    //     "title": "Nombres De Los Carros Teslas Son Raros",
+    //     "nombre_carro": "Model S,E,X,Y",
+    //     "modelo_carro": "2024",
+    //     "contenido": "De acuerdo con Elon Musk sus carros al juntar sus modelos se convierte en SEXY",
+    //     "imagen": "",
+    //     "fecha": "2024-04-04"
+    //   },
+    //   {
+    //     "id": 2,
+    //     "title": "BMW",
+    //     "nombre_carro": "M5",
+    //     "modelo_carro": "2024",
+    //     "contenido": "VROOM",
+    //     "imagen": "https://images.hgmsites.net/med/2021-bmw-5-series_100749425_m.jpg",
+    //     "fecha": "2024-04-01"
+    //   },
+    //   {
+    //     "id": 3,
+    //     "title": "Rayo Maqueen",
+    //     "nombre_carro": "Corvette",
+    //     "modelo_carro": "2024",
+    //     "contenido": "VROOM",
+    //     "imagen": "https://static.motor.es/fotos-noticias/2020/03/que-coche-es-rayo-mcqueen-202066150-1585635516_1.jpg",
+    //     "fecha": "2024-04-01"
+    //   }
+    
+    //]

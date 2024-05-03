@@ -42,7 +42,7 @@ function Listacontent(){
             setdata(fetchedPosts); // Update state with fetched data
             console.log(data); // Log the data after it's set in state (optional)
           } catch (error) {
-            console.error(error);
+            console.log(error);
           }
         };
     
@@ -55,15 +55,11 @@ function Listacontent(){
 
         {data.map((elemento) => (
             
-            <Contenido  id={elemento.id} name={elemento.title} descripcion={elemento.contenido} imagen={elemento.imagen}></Contenido>
+            <Contenido  id={elemento.id} name={elemento.title} modelo={elemento.nombre_carro} years={elemento.modelo_carro} descripcion={elemento.contenido} imagen={elemento.imagen}></Contenido>
         ))}
         
 
-        {/* <Contenido name='El mejor carro de todos, Lindas vistas y todo para la familia' descripcion={datox} imagen='https://hips.hearstapps.com/hmg-prod/images/bmw-x5-2024-1600-03-1675845761.jpg'  ></Contenido>
-        <Contenido name='ASH' descripcion={datox} imagen={imagen}></Contenido>
-        <Contenido name='Juan' descripcion={datox} imagen='https://hips.hearstapps.com/hmg-prod/images/bmw-x5-2024-1600-03-1675845761.jpg'></Contenido>
-        <Contenido name='Juan' descripcion={datox} imagen='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxw2QY5-OW7MCFPlNS2dZ88uCmCG9TiPqo2k941PM5Pg&s'></Contenido>
-         */}
+
         </div>
 
     )
