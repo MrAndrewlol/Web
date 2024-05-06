@@ -1,23 +1,23 @@
 import pkg from 'pg';
 const { Pool } = pkg;
 
-// const conn = new  Client({
-//   user: process.env.db_user,
-//   host: process.env.db_host, //SUSTITUIR EL RESTO DE VARIABLES DE ENTORNO
-//   database: process.env.db_database,
-//   password: process.env.db_password,
-//   port: 5432,
-
-// })
-
 const conn = new  Pool({
-  user: 'postgres',
-  host: 'localhost', //SUSTITUIR EL RESTO DE VARIABLES DE ENTORNO
-  database: 'postgres',
-  password: '7536',
+  user: process.env.db_user,
+  host: process.env.db_host, //SUSTITUIR EL RESTO DE VARIABLES DE ENTORNO
+  database: process.env.db_database,
+  password: process.env.db_password,
   port: 5432,
 
 })
+
+// const conn = new  Pool({
+//   user: 'postgres',
+//   host: 'localhost', //SUSTITUIR EL RESTO DE VARIABLES DE ENTORNO
+//   database: 'postgres',
+//   password: '7536',
+//   port: 5432,
+
+// })
 
 conn
 	.connect()
