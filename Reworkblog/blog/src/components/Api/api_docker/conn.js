@@ -2,11 +2,11 @@ import pkg from 'pg';
 const { Pool } = pkg;
 
 const conn = new  Pool({
-    user: 'postgres', //cars
-    host: 'localhost', //dpg-cop6d72cn0vc73dn8na0-a.oregon-postgres.render.com
-    database: 'postgres', //carblog
-    password: '7536', //OoVoOTUlKSgblmTyRlUvOedU1GPtALRf
-    port: 5432
+    user: process.env.db_user,
+    host: process.env.db_host, //SUSTITUIR EL RESTO DE VARIABLES DE ENTORNO
+    database: process.env.db_database,
+    password: process.env.db_password,
+    port: 5432,
 
 })
 
