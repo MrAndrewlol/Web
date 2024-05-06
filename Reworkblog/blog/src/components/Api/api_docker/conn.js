@@ -2,7 +2,7 @@ import pkg from 'pg';
 const { Pool } = pkg;
 
 const conn = new  Pool({
-  url: 
+  url: `${process.env.EXTERNAL_URL}`,
   database: 'carblog'
 
 })
