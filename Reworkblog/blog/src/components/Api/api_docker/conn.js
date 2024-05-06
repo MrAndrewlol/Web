@@ -1,7 +1,7 @@
 import pkg from 'pg';
-const { Pool } = pkg;
+const { Client } = pkg;
 
-const conn = new  Pool({
+const conn = new  Client({
     user: process.env.db_user,
     host: process.env.db_host, //SUSTITUIR EL RESTO DE VARIABLES DE ENTORNO
     database: process.env.db_database,
@@ -12,6 +12,7 @@ const conn = new  Pool({
 
 
 const getClient = () =>{
+  conn.connect()
   return conn
 }
 
