@@ -1,5 +1,5 @@
 import pkg from 'pg';
-const { Client } = pkg;
+const { Pool } = pkg;
 
 // const conn = new  Client({
 //   user: process.env.db_user,
@@ -10,11 +10,11 @@ const { Client } = pkg;
 
 // })
 
-const conn = new  Client({
-  user: 'cars',
-  host: 'dpg-cop6d72cn0vc73dn8na0-a', //SUSTITUIR EL RESTO DE VARIABLES DE ENTORNO
-  database: 'carblog',
-  password: 'OoVoOTUlKSgblmTyRlUvOedU1GPtALRf',
+const conn = new  Pool({
+  user: 'postgres',
+  host: 'localhost', //SUSTITUIR EL RESTO DE VARIABLES DE ENTORNO
+  database: 'postgres',
+  password: '7536',
   port: 5432,
 
 })
