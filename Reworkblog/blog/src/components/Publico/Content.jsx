@@ -1,7 +1,15 @@
 import './Content.css'
-import React from "react";
 import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/popover";
+import proptypes from 'prop-types'
 
+
+Contenido.propTypes = {
+  imagen: proptypes.string.isRequired,
+  name: proptypes.string.isRequired,
+  modelo: proptypes.string.isRequired,
+  years : proptypes.string.isRequired,
+  descripcion : proptypes.string.isRequired
+}
 
 function Contenido(props){
 
@@ -28,10 +36,8 @@ function Contenido(props){
     )
 
 }
-
-
-
 export default Contenido
+
 
    // const datos = [
     //   {

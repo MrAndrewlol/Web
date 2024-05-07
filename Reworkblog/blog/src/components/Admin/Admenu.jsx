@@ -45,7 +45,6 @@ function Adminpage() {
       try {
         const fetchedPosts = await conseguirPost();
         setdata(fetchedPosts); // Update state with fetched data
-        console.log(data); // Log the data after it's set in state (optional)
       } catch (error) {
         console.log(error);
       }
@@ -61,7 +60,7 @@ function Adminpage() {
 
   };
 
-  const agregarDiv = (nuevoElemento) => {
+  const agregarDiv = () => {
   
   postear( title,nombre_carro, modelo_carro, contenido, imagen )
 

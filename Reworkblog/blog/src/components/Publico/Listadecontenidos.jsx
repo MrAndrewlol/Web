@@ -1,7 +1,7 @@
 
 import './Listadoconten.css'
 import Contenido from './Content.jsx'
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { conseguirPost } from '../Api/api_docker/controlador';
 
 function Listacontent(){
@@ -54,12 +54,12 @@ function Listacontent(){
         <div className='estructuralist'>
 
         {data.map((elemento) => (
-            
+          <>
+            <div key={elemento.id}></div>
             <Contenido  id={elemento.id} name={elemento.title} modelo={elemento.nombre_carro} years={elemento.modelo_carro} descripcion={elemento.contenido} imagen={elemento.imagen}></Contenido>
+          </>
         ))}
         
-
-
         </div>
 
     )
@@ -69,3 +69,4 @@ function Listacontent(){
 
 
 export default Listacontent
+

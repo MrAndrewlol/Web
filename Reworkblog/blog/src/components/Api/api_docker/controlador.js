@@ -1,5 +1,5 @@
 export async function conseguirPost(){
-    let data = await fetch('http://127.0.0.1:3000/posts',
+    let data = await fetch('https://web-7pst.onrender.com/posts',
     {
         method: 'GET',
         headers: {
@@ -15,7 +15,7 @@ export async function conseguirPost(){
 export async function unicopost(id){
 
     try{
-        const data = await fetch(`http://127.0.0.1:3000/posts/${id}`)
+        const data = await fetch(`https://web-7pst.onrender.com//posts/${id}`)
         return data
     } catch(e){
         return e
@@ -36,7 +36,7 @@ export async function postear(title, nombrecarro, modelocarro, content, imagen){
     }
 
     try{
-        const data = await fetch(`http://127.0.0.1:3000/posts`,
+        const data = await fetch(`https://web-7pst.onrender.com/posts`,
 
     {
         method: 'POST',
@@ -57,7 +57,7 @@ export async function postear(title, nombrecarro, modelocarro, content, imagen){
 export async function eliminarunpost( id ){
 
     try{
-        const data = await fetch(`http://127.0.0.1:3000/posts/${id}`,
+        const data = await fetch(`https://web-7pst.onrender.com/posts/${id}`,
     {
         method: 'DELETE',
         headers: {
@@ -87,7 +87,7 @@ export async function editarpost( id,title, nombrecarro, modelocarro, content, i
     console.log(object)
 
     try{
-        const data = await fetch(`http://127.0.0.1:3000/posts/${id}`,
+        const data = await fetch(`https://web-7pst.onrender.com/posts/${id}`,
 
     {
         method: 'PUT',

@@ -6,12 +6,10 @@ const conn = getClient()
 
 export async function getAllPosts() {
   try {
-    const result = await conn.query(
-        'SELECT * FROM blogs'
-    )
+    const result = await conn.query('SELECT * FROM blogs')
     return result.rows
 } catch (err) {
-    throw err
+    return err
 }
 }
 

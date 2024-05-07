@@ -42,12 +42,8 @@ app.get('/posts/:id', async (req, res) => {
 app.post('/posts', async (req, res) => {
   const [title, nombrecarro, modelocarro, content, imagen] = [req.body.title,
     req.body.nombre_carro, req.body.modelo_carro, req.body.contenido, req.body.imagen]
-  if (imagen === 'undefined') {
-    imagen = null
-  }
   const blogs = await createPost(title, nombrecarro, modelocarro, content, imagen)
   res.json(blogs)
-
 })
 
 app.delete('/posts/:id', async (req, res) => {
@@ -62,9 +58,6 @@ app.put('/posts/:id', async (req, res) => {
 
   const [title, nombrecarro, modelocarro, content, imagen] = [req.body.title,
     req.body.nombre_carro, req.body.modelo_carro, req.body.contenido, req.body.imagen]
-  if (imagen === 'undefined') {
-    imagen = null
-  }
   const result = await putpost(id, title, nombrecarro, modelocarro, content, imagen)
   res.json(result)
   

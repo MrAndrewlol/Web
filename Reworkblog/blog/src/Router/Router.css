@@ -1,0 +1,10 @@
+.Routersi{
+    padding: 1%;
+    animation-name: shadows;
+    animation-duration: 6s;
+}
+
+@keyframes shadows {
+    from {box-shadow: -100px -12px 27px 26px rgba(204, 50, 50, 0.2);}
+    to {box-shadow: 100px -12px 27px 26px rgba(45, 201, 55, 0.2);}
+  }

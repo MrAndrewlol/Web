@@ -1,12 +1,8 @@
 import './Contact.css'
-import React from "react";
-import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/popover";
 
 
 function Contenido(){
 
-
-    
     return (
         <div style={{margin:'2%'}}>
             <h1>Comunicate con el jefe </h1>
@@ -18,8 +14,6 @@ function Contenido(){
            <div>
             <a style={{fontSize:'50px'}} href='https://theuselessweb.com/' >correrblog@gmail.com(fake)</a>
             </div>
-
-            
         </div>
         
         
