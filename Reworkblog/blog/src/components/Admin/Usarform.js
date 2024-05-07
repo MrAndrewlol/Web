@@ -24,12 +24,12 @@ function useLoginForm() {
     if (Object.keys(validationErrors).length === 0 && values.user === 'Andre' && values.pass === '123' ) {
 
       console.log('Form submitted with valid data:', values);
-      window.location.replace(`/adminpage?user=${values.user}&password=${values.pass}`); // Assuming server-side validation
+      window.location.pathname = `/adminpage`; 
       localStorage.setItem('Login', true);
       setValido(''); 
     } else {
 
-      validationErrors.pass = 'Username es requerido or password es incorrecto';
+      validationErrors.pass = 'Username o password es incorrecto';
     }
   };
 
