@@ -39,15 +39,15 @@ function Listacontent(){
         const fetchData = async () => {
           try {
             const fetchedPosts = await conseguirPost();
-            setdata(fetchedPosts); // Update state with fetched data
-            console.log(data); // Log the data after it's set in state (optional)
+            setdata(fetchedPosts);
+            
           } catch (error) {
             console.log(error);
           }
         };
     
         fetchData();
-      }, []); // Empty dependency array: fetch data only on initial render
+      }, []); 
     
 
     return (
@@ -65,8 +65,5 @@ function Listacontent(){
     )
 
 }
-
-
-
 export default Listacontent
 

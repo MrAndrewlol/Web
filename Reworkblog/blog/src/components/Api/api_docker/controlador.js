@@ -84,8 +84,7 @@ export async function editarpost( id,title, nombrecarro, modelocarro, content, i
         "imagen": imagen,
         "fecha_publicacion": Date.now()
     }
-    console.log(object)
-
+    
     try{
         const data = await fetch(`https://web-7pst.onrender.com/posts/${id}`,
 
