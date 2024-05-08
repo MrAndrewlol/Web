@@ -24,7 +24,7 @@ function useLoginForm() {
     if (Object.keys(validationErrors).length === 0 && values.user === 'Andre' && values.pass === '123' ) {
 
       console.log('Form submitted with valid data:', values);
-      window.location.pathname = `/adminpage`; 
+      window.location.pathname = `/`; 
       localStorage.setItem('Login', true);
       setValido(''); 
     } else {

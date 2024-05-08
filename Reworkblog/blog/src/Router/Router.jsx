@@ -8,6 +8,8 @@ const LazyHome = lazy(() => import("../components/Publico/Homepage"));
 
 import proptypes from 'prop-types'
 
+
+
 function Routers({ ruta }) {
     switch (ruta) {
         case "/": //Main Page
